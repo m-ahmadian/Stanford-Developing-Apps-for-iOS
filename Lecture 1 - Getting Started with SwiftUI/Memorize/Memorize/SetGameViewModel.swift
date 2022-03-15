@@ -1,5 +1,5 @@
 //
-//  EmojiMemoryGame.swift
+//  SetGameViewModel.swift
 //  Memorize
 //
 //  Created by Mehrdad Ahmadian on 2022-02-07.
@@ -7,13 +7,31 @@
 
 import SwiftUI
 
-class EmojiMemoryGame: ObservableObject {
-    typealias Card = MemoryGame<String>.Card
+class SetGameViewModel: ObservableObject {
+    @Published var model: SetGame
+
+    init() {
+        self.model = setGame()
+    }
+
+    // Access to the model
+    var cards: Array<Card> {
+        model.cards
+    }
+
+    var cardsToShow: Array<Card> {
+        Array(self.cards.filter({ $0.isHidden}))
+    }
+
+
+
+
+    typealias Card = setGame<String>.Card
 
     private static let emojis = ["🚗","🚌","🚑","🚜","🛴","🚲","🚔","🛺","🚘","🚃","🚄","🚠","🚅","✈️","🚀","🛸","🚁","🛶","🚤","🚢","🛳","🚓","🚛","🛵"]
 
-    private static func createMemoryGame() -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: 6) { pairIndex in
+    private static func createMemoryGame() -> setGame<String> {
+        setGame<String>(numberOfPairsOfCards: 6) { pairIndex in
                 emojis[pairIndex]
             }
     }
