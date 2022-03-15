@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-    @ObservedObject var game: EmojiMemoryGame
+    @ObservedObject var game: SetGameViewModel
 
     var body: some View {
         AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
@@ -29,7 +29,7 @@ struct EmojiMemoryGameView: View {
 
 
 struct CardView: View {
-    let card: EmojiMemoryGame.Card
+    let card: SetGameViewModel.Card
 
     var body: some View {
         GeometryReader { geometry in
@@ -64,7 +64,7 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let game = EmojiMemoryGame()
+        let game = SetGameViewModel()
         game.choose(game.cards.first!)
         return EmojiMemoryGameView(game: game)
     }
